@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" href="../assets/icons/logo.png">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6fb;
+    }
+
+    .navbar {
+        background: #2f2fa2;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+    }
+
+    .logo {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 25px;
+        font-size: 15px;
+        opacity: 0.8;
+    }
+
+    nav a:hover,
+    nav a.active {
+        opacity: 1;
+        border-bottom: 2px solid white;
+        padding-bottom: 4px;
+    }
+
+    .hero {
+        height: 95vh;
+        background: linear-gradient(to right, #0f172a, #1e3a8a);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .hero-content p {
+        margin-bottom: 30px;
+        color: #e2e8f0;
+    }
+
+    .btn {
+        padding: 12px 28px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 5px;
+        transition: 0.3s;
+    }
+
+    .primary {
+        background: #38bdf8;
+        color: #0f172a;
+    }
+
+    .primary:hover {
+        background: #0ea5e9;
+        transform: translateY(-3px);
+    }
+
+    .secondary {
+        border: 1px solid white;
+        color: white;
+    }
+
+    .secondary:hover {
+        background: white;
+        color: #0f172a;
+    }
+
+    .how {
+        padding: 80px 10%;
+        text-align: center;
+    }
+
+    .how-grid {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        margin-top: 40px;
+        flex-wrap: wrap;
+    }
+
+    .how-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        width: 250px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .stats {
+        padding: 80px 10%;
+        text-align: center;
+    }
+
+    .stat-grid {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 40px;
+        flex-wrap: wrap;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        text-align: center;
+        width: 250px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .recent {
+        padding: 80px 10%;
+        text-align: center;
+    }
+
+    .recent-grid {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+    }
+
+    .item-card {
+        width: 250px;
+        min-height: 300px;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .item-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    .item-card h3 {
+        padding: 10px 20px 5px;
+        font-size: 18px;
+    }
+
+    .item-card p {
+        padding: 0 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #4a5568;
+        display: block;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    .item-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin: 10px 0 15px;
+    }
+
+    .lost {
+        align-self: center; /* Naka-align sa left pero nasa baba */
+        margin-top: auto;       /* ETO ANG PINAKA-IMPORTANTE: Itutulak nito ang badge sa pinakababa */
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: bold;
+        background: #fee2e2;
+        color: #b91c1c;
+        text-transform: uppercase;
+    }
+
+    .found {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .cta {
+        background: #1e3a8a;
+        color: white;
+        padding: 35px 20px;
+        text-align: center;
+    }
+
+    .cta h2 {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    footer {
+        background: #0f172a;
+        color: #94a3b8;
+        text-align: center;
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    .top-arrow {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+
+    .top-arrow img {
+        width: 24px;
+        height: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .hero-content h1 {
+            font-size: 32px;
+        }
+
+        .navbar {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+    </style>
+</head>
+<body>
+    
+    <header class="navbar" id="top">
+        <div class="logo">Lost & Found</div>
+        <nav>
+            <a href="home.html" class="active">Home</a>
+            <a href="lost.html">Lost Item</a>
+            <a href="found.html">Found Item</a>
+            <a href="about.html">About us</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Lost Something Important?</h1>
+            <p>Report lost items or helps other recover they've misplaced.</p>
+            <div class="hero-buttons">
+                <a href="lost.html" class="btn primary">Report Lost Item</a>
+                <a href="found.html" class="btn secondary">Browse Found Item</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="how">
+        <h1>How It Works</h1>
+        <div class="how-grid">
+            <div class="how-card">
+                <h2>1. Post</h2>
+                <p>Report a lost or found item with details and photo.</p>
+            </div>
+            <div class="how-card">
+                <h2>2. Connect</h2>
+                <p>Get matched with someone who posted a related item.</p>
+            </div>
+            <div class="how-card">
+                <h2>3. Recover</h2>
+                <p>Meet safely and return the item to its owner.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+    <h1>List of items</h1>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <h3 id="lost-count">0</h3>
+            <p>Lost Item</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="found-count">0</h3>
+            <p>Found Item</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="returned-count">0</h3>
+            <p>Items Returned</p>
+        </div>
+    </div>
+</section>
+
+    <section class="recent">
+        <h2>Recently Posted</h2>
+        <div class="recent-grid" id="itemsContainer">
+
+        </div>
+    </section>
+
+    <a href="#top" class="top-arrow">
+        <img src="../assets/icons/arrowtop2.png" alt="Back to top">
+    </a>
+
+    <section class="cta">
+        <h2>Help someone recover what they lost</h2>
+    </section>
+
+    <footer>
+        <p>© 2026 Lost & Found Website</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../js/home.js"></script>
+
+</body>
+</html>

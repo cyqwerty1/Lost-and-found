@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Item</title>
+    <link rel="icon" href="../assets/icons/logo.png">
+    <style>
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+    }
+
+    body {
+            background: #f4f6fb;
+    }
+
+    .navbar {
+            background: #2f2fa2;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+    }
+
+    .logo {
+            font-weight: bold;
+            font-size: 18px;
+    }
+
+    nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            opacity: 0.8;
+    }
+
+        nav a:hover,
+        nav a.active {
+            opacity: 1;
+            border-bottom: 2px solid white;
+            padding-bottom: 4px;
+        }
+
+        .page-header {
+            padding: 80px 40px;
+            text-align: center;
+            background: linear-gradient(to right, #eef2ff, #f8fafc);
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .filter-section {
+            padding: 25px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            float: inline-end;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-left: auto;
+        }
+
+        .filter-section .report-btn {
+            background: #2f2fa2;
+            color: white;
+            border: none;
+            padding: 15px 18px;
+            border-radius: 10px 10px;
+            cursor: pointer;
+        }
+
+        .filter-section .report-btn:hover {
+            background: #4545c5;
+        }
+
+        .filter-container input,
+        .filter-container select,
+        .filter-container .btn,
+        .filter-section .report-btn {
+            margin-top: 5px;
+        }
+
+        .filter-container input,
+        .filter-container select {
+            padding: 10px 18px;
+            border-radius: 10px 10px;
+            border: 1px solid #cbd5e1;
+            width: 180px;
+            font-size: 14px;
+        }
+
+        .filter-container select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .filter-container input:focus,
+        .filter-container select:focus {
+            outline: none;
+            border-radius: 10px;
+            border-color: #2563eb;
+        }
+
+        .item-section {
+            padding: 40px 40px;
+        }
+
+        .items-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .item-card {
+            width: 280px;
+            min-height: 300px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .item-card h3 {
+            padding: 10px 20px 5px;
+            font-size: 18px;
+        }
+
+        .item-card p {
+            padding: 0 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #4a5568;
+            display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            line-height: 1.5;
+            text-align: left;
+            padding: 5px 5px;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .lost {
+            align-self: center; /* Naka-align sa left pero nasa baba */
+            margin-top: auto;       /* ETO ANG PINAKA-IMPORTANTE: Itutulak nito ang badge sa pinakababa */
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            background: #fee2e2;
+            color: #b91c1c;
+            text-transform: uppercase;
+        }
+
+        .found {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .item-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .item-content h3 {
+            margin-bottom: 5px;
+        }
+
+        .item-content p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            display: block;
+        }
+
+        .btn.small {
+            padding: 15px;
+            font-size: 12px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        .campus {
+            width: 100%;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+
+        /* this is for preview of uploading photos */
+        .report-box h2 {
+            text-align: center;
+            margin-top: -30px;
+        }
+
+        #imageUpload {
+            border: none;
+        }
+
+        .report-modal{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .report-box{
+            width: 420px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .close-btn{
+            align-self: flex-end;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            color: red;
+        }
+
+        .report-box input,
+        .report-box select,
+        .report-box textarea{
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .report-box textarea{
+            height: 50px;
+            resize: none;
+        }
+
+        #imagePreview{
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: none;
+        }
+
+        /* this is for preview of uploading photos(last) */
+        #postItem{
+            background: #2f2fa2;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #categoryInput {
+            padding: 10px 18px;
+            border: 1px solid #eef2ff;
+        }
+        </style>
+    </head>
+    <body>
+
+        <header class="navbar">
+            <div class="logo">Lost & Found</div>
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="lost.html" class="active">Lost Item</a>
+                <a href="found.html">Found Item</a>
+                <a href="about.html">About us</a>
+            </nav>
+        </header>
+
+        <section class="page-header">
+            <h1>Lost Items</h1>
+            <p>Browse reported lost items and help return them to their owners.</p>
+        </section>
+
+        <section class="filter-section">
+            <button class="report-btn" id="reportBtn">Report Item</button>
+
+            <input type="file" id="reportFile" accept="image/*" style="display: none;">
+
+            <div class="filter-container">
+            
+                <select id="categoryFilter">
+                    <option value="All">All Categories</option>
+                    <option value="Wallet">Wallet</option>
+                    <option value="Phone">Phone</option>
+                    <option value="ID">ID</option>
+                    <option value="Bag">Bag</option>
+                    <option value="Others">Others</option>
+                </select>
+
+                <select id="campusFilter" onchange="loadItems()">
+                    <option value="All">All Campuses</option>
+                    <option value="Binangonan">Binangonan</option>
+                    <option value="Cainta">Cainta</option>
+                    <option value="Angono">Angono</option>
+                    <option value="Taytay">Taytay</option>
+                    <option value="Antipolo">Antipolo</option>
+                    <option value="Cogeo">Cogeo</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="item-section">
+            <div id="section-Binangonan" class="campus-group" style="display:none;">
+                <div class="campus">Binangonan Campus</div>
+                <div class="items-grid" id="grid-Binangonan"></div>
+            </div>
+
+            <div id="section-Cainta" class="campus-group" style="display:none;">
+                <div class="campus">Cainta Campus</div>
+                <div class="items-grid" id="grid-Cainta"></div>
+            </div>
+
+            <div id="section-Angono" class="campus-group" style="display:none;">
+                <div class="campus">Angono Campus</div>
+                <div class="items-grid" id="grid-Angono"></div>
+            </div>
+
+            <div id="section-Taytay" class="campus-group" style="display:none;">
+                <div class="campus">Taytay Campus</div>
+                <div class="items-grid" id="grid-Taytay"></div>
+            </div>
+
+            <div id="section-Antipolo" class="campus-group" style="display:none;">
+                <div class="campus">Antipolo Campus</div>
+                <div class="items-grid" id="grid-Antipolo"></div>
+            </div>
+
+            <div id="section-Cogeo" class="campus-group" style="display:none;">
+                <div class="campus">Cogeo Campus</div>
+                <div class="items-grid" id="grid-Cogeo"></div>
+            </div>
+
+    </section>
+
+        <!-- this is for preview of uploading photos -->
+        <div class="report-modal" id="reportModal">
+
+        <div class="report-box">
+
+            <span class="close-btn" id="closeModal">✖</span>
+
+            <h2>Report Lost Item</h2>
+
+            <input type="file" id="imageUpload" accept="image/*">
+
+            <img id="imagePreview">
+
+            <label>Category</label>
+            <select id="categoryInput">
+                <option value="" disabled selected>Select Category</option>
+                <option value="Wallet">Wallet</option>
+                <option value="Phone">Phone</option>
+                <option value="ID">ID</option>
+                <option value="Bag">Bag</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <label>Campus</label>
+            <select id="campusInput">
+                <option value="" disabled selected>Select Campus</option>
+                <option value="Binangonan">Binangonan</option>
+                <option value="Cainta">Cainta</option>
+                <option value="Angono">Angono</option>
+                <option value="Taytay">Taytay</option>
+                <option value="Antipolo">Antipolo</option>
+                <option value="Cogeo">Cogeo</option>
+            </select>
+
+            <label>Phone Number</label>
+            <input type="text" id="phoneInput">
+
+            <label>Description</label>
+            <textarea id="messageInput" placeholder="Describe the item"></textarea>
+
+            <button id="postBtn" type="button" class="report-btn">Post</button>
+
+        </div>
+        </div> <!-- this is for preview of uploading photos -->
+
+        <footer>
+            <p>© 2026 Lost & Found System</p>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+        <script src="../js/lost.js"></script>
+        
+    </body>
+    </html>

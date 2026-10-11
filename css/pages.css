@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6fb;
+}
+
+.navbar {
+    background: #2f2fa2;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+nav a:hover,
+nav a.active {
+    opacity: 1;
+    border-bottom: 2px solid white;
+    padding-bottom: 4px;
+}
